@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Link,useNavigate} from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
 import {
   RiEmotionHappyFill,
   RiDashboardFill,
@@ -16,18 +18,29 @@ function SidebarIcons() {
     // Function to handle item click and update the activeItem state
     const handleItemClick = (itemName) => {
       setActiveItem(itemName);
+      
     };
-    
+    const { logOut } = useUserAuth();
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+      try {
+        await logOut();
+        navigate('/');
+      } catch (err) {
+        console.log(err.message);
+      }
+    };    
     return (
         <>
         <div
-       className='flex flex-col gap-28 pt-6 pl-6 text-[16px] w-[80px]'>
+       className='flex flex-col gap-28 pt-6 pl-6 text-[16px] w-[80px] max-sm:pl-1 max-sm:w-[56px]'>
          <div className='flex text-[#87318f] items-center pl-2 '>
            <RiEmotionHappyFill className='h-7 w-7 ' />
            
          </div>
          <div className='flex flex-col gap-4 '>
-           <div
+            <Link to="/home">
+            <div
              className={`flex items-center pl-2 pt-1 pb-1 ${
                activeItem === 'Dashboard'
                  ? 'text-[#87318f] bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl'
@@ -38,7 +51,9 @@ function SidebarIcons() {
              <RiDashboardFill className='h-7 w-7 ' />
             
            </div>
-           <div
+            </Link>
+             <Link to="/registro">
+             <div 
              className={`flex items-center pl-2 pt-1 pb-1 ${
                activeItem === 'Empleados'
                  ? 'text-[#87318f] bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl'
@@ -49,6 +64,8 @@ function SidebarIcons() {
              <RiUserFill className='h-7 w-7' />
             
            </div>
+             </Link>
+
            <div
              className={`flex items-center pl-2 pt-1 pb-1  ${
                activeItem === 'Mensaje'
@@ -96,10 +113,10 @@ function SidebarIcons() {
              <RiSettings2Fill className='h-7 w-7' />
             
            </div>
-           <div className='flex text-red-500 pl-2'>
-             <RiLogoutBoxRFill className='h-7 w-7' />
-             
-           </div>
+           <div className='flex  hover:text-red-500 pl-2 ' onClick={handleLogout}>
+            <button><RiLogoutBoxRFill className='h-7 w-7' /></button>
+            
+          </div>
            <div>
  
            </div>

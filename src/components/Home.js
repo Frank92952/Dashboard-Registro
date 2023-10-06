@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import Navar from './Navar';
 import SidebarIcons from './SidebarIcons';
 
+
 const Home = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
@@ -38,14 +39,21 @@ const Home = () => {
         {sidebarVisible ? (
           <Sidebar toggleSidebar={toggleSidebar} sidebarVisible={sidebarVisible} />
         ) : (
-          <SidebarIcons />
+          <SidebarIcons  />
         )}
+
         <div className=''>
           <Navar toggleSidebar={toggleSidebar} isSidebarIcons={!sidebarVisible} />
-          <div className='bg-[#EEEDEC] h-full rounded-tl-3xl'></div>
+
+          <div className='bg-[#EEEDEC] h-full rounded-tl-3xl'>
+            <div className='p-10'>
+              Home
+              
+            </div>
+          </div>
         </div>
       </div>
-   
+        
     </>
   );
 };

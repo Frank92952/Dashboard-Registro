@@ -1,5 +1,6 @@
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Registro from "./components/Registro";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -10,8 +11,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path='/registro' element={<ProtectedRoute><Registro /></ProtectedRoute>} />
           <Route path='/' element={<Login />} />
           <Route path='/signup' element={<Signup/>} />
+          
         </Routes>
      
       </BrowserRouter>

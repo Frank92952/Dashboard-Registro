@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Link,useNavigate} from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
 import {
   RiEmotionHappyFill,
   RiDashboardFill,
@@ -10,26 +12,36 @@ import {
   RiLogoutBoxRFill,
 } from 'react-icons/ri';
 
-function Sidebar({ toggleSidebar, sidebarVisible }) {
-  const [activeItem, setActiveItem] = useState('Dashboard');
+function Sidebar({  sidebarVisible }) {
+  const [activeItem, setActiveItem] = useState("Dashboard");
   
   // Function to handle item click and update the activeItem state
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
   };
-
+  const { logOut } = useUserAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate('/');
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return (
     <>
        <div
-      className={`flex flex-col gap-28 pt-6 pl-6 text-[16px] w-[260px] ${
+      className={`flex flex-col gap-28 pt-6 pl-6  text-[16px] max-sm:text-[13px] w-[260px]  max-lg:w-[210px] max-sm:w-[137px] max-sm:pl-1  ${
         sidebarVisible ? 'block' : 'hidden'
       }`}
     >
-        <div className='flex text-[#87318f] items-center pl-2 '>
+        <div className='flex text-[#87318f] items-center pl-2 max-sm:flex-col max-sm:-ml-8 '>
           <RiEmotionHappyFill className='h-7 w-7' />
-          <h1 className='ml-5 text-[20px]  '>AdminCarmen</h1>
+          <h1 className='ml-5 text-[20px] max-sm:text-[16px]  '>AdminCarmen</h1>
         </div>
         <div className='flex flex-col gap-4 '>
+          <Link to="/home">
           <div
             className={`flex items-center pl-2 pt-1 pb-1 ${
               activeItem === 'Dashboard'
@@ -41,6 +53,9 @@ function Sidebar({ toggleSidebar, sidebarVisible }) {
             <RiDashboardFill className='h-7 w-7' />
             <h1 className='ml-3'>Dashboard</h1>
           </div>
+          </Link>
+
+          <Link to="/registro">
           <div
             className={`flex items-center pl-2 pt-1 pb-1 ${
               activeItem === 'Empleados'
@@ -52,6 +67,8 @@ function Sidebar({ toggleSidebar, sidebarVisible }) {
             <RiUserFill className='h-7 w-7' />
             <h1 className='ml-3'>Empleados</h1>
           </div>
+          </Link>
+
           <div
             className={`flex items-center pl-2 pt-1 pb-1  ${
               activeItem === 'Mensaje'
@@ -99,9 +116,9 @@ function Sidebar({ toggleSidebar, sidebarVisible }) {
             <RiSettings2Fill className='h-7 w-7' />
             <h1 className='ml-3'>Configuración</h1>
           </div>
-          <div className='flex text-red-500 pl-2'>
-            <RiLogoutBoxRFill className='h-7 w-7' />
-            <h1 className='ml-3'>Salir</h1>
+          <div className='flex  hover:text-red-500 pl-2 ' onClick={handleLogout}>
+            <button><RiLogoutBoxRFill className='h-7 w-7' /></button>
+            <button className='ml-3'>Salir</button>
           </div>
           <div>
 
