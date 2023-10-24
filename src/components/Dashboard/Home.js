@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
-import { useUserAuth } from '../context/UserAuthContext';
-import Sidebar from './Sidebar';
-import Navar from './Navar';
-import SidebarIcons from './SidebarIcons';
-
+import { useUserAuth } from '../../context/UserAuthContext';
+import Sidebar from '../Sidebar';
+import Navar from '../Navar';
+import SidebarIcons from '../SidebarIcons';
+import { useSidebar } from '../../context/SidebarContext'; // Importa el contexto
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -17,29 +17,16 @@ const Home = () => {
       console.log(err.message);
     }
   };
-  const [sidebarVisible, setSidebarVisible] = useState(true);
 
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
+  const { sidebarVisible, toggleSidebar } = useSidebar(); // Usa el estado del Sidebar desde el contexto
+
   return (
     <>
-      
-      {/* <div className="p-4 box mt-3 text-center">
-        Hello Welcome <br />
-        {user && user.email}
-      </div>
-      <div className="d-grid gap-2">
-        <button onClick={handleLogout}>
-          Log out
-        </button>
-        
-      </div> */}
       <div className='flex '>
         {sidebarVisible ? (
           <Sidebar toggleSidebar={toggleSidebar} sidebarVisible={sidebarVisible} />
         ) : (
-          <SidebarIcons  />
+          <SidebarIcons />
         )}
 
         <div className=''>
@@ -48,14 +35,13 @@ const Home = () => {
           <div className='bg-[#EEEDEC] h-full rounded-tl-3xl'>
             <div className='p-10'>
               Home
-              
             </div>
           </div>
         </div>
       </div>
-        
     </>
   );
 };
 
 export default Home;
+
