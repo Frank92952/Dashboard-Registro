@@ -5,19 +5,20 @@ import View from "./components/Empleados/View";
 import About from "./components/Empleados/About";
 import Registro from "./components/Empleados/Registro";
 import { ActiveItemProvider } from './context/ActiveItemContext';
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import {BrowserRouter, Routes,Switch, Route} from "react-router-dom"
 import Signup from "./components/Login/Signup";
 import { SidebarProvider } from './context/SidebarContext'; // Importa el SidebarProvider
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
       <UserAuthContextProvider>
-        
-       
         <BrowserRouter>
         <ActiveItemProvider>
         <SidebarProvider>
+        <ToastContainer position="top-center" />
           <Routes>
           <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path='/registro' element={<ProtectedRoute><Registro /></ProtectedRoute>} />

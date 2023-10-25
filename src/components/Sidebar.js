@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useActiveItem } from '../context/ActiveItemContext';
 import {
@@ -14,6 +14,7 @@ import {
 } from 'react-icons/ri';
 
 function Sidebar({ sidebarVisible }) {
+  const location = useLocation();
   const { logOut } = useUserAuth();
   const navigate = useNavigate();
   const { activeItem, setActiveItem } = useActiveItem();
@@ -46,11 +47,11 @@ function Sidebar({ sidebarVisible }) {
           </div>
         </Link>
         <Link to="/registro">
-          <div className={`flex items-center pl-2 pt-1 pb-1 ${window.location.pathname === '/registro' ? 'bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl text-[#87318f]' : ''}`}>
-            <RiUserFill className="h-7 w-7" />
-            <h1 className="ml-3">Empleados</h1>
-          </div>
-        </Link>
+        <div className={`flex items-center pl-2 pt-1 pb-1 ${location.pathname.includes('/registro') ? 'bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl text-[#87318f]' : ''}`}>
+          <RiUserFill className="h-7 w-7" />
+          <h1 className="ml-3">Empleados</h1>
+        </div>
+      </Link>
         <Link to="/mensaje">
           <div className={`flex items-center pl-2 pt-1 pb-1 ${window.location.pathname === '/mensaje' ? 'bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl text-[#87318f]' : ''}`}>
             <RiMessage3Fill className='h-7 w-7' />

@@ -52,7 +52,7 @@ function SidebarIcons() {
           </Link>
           <Link to="/registro">
             <div
-              className={`flex items-center pl-2 pt-1 pb-1 ${window.location.pathname === '/registro' ? 'bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl text-[#87318f]' : ''}`}
+              className={`flex items-center pl-2 pt-1 pb-1 ${location.pathname.includes('/registro') ? 'bg-[#EEEDEC] border-t-4 border-b-4 border-l-4 rounded-bl-3xl rounded-tl-3xl text-[#87318f]' : ''}`}
             >
               <RiUserFill className="h-7 w-7" />
             </div>
