@@ -4,6 +4,7 @@ import AddEdit from "./components/Empleados/AddEdit";
 import View from "./components/Empleados/View";
 import About from "./components/Empleados/About";
 import Registro from "./components/Empleados/Registro";
+import Search from "./components/Empleados/Search";
 import { ActiveItemProvider } from './context/ActiveItemContext';
 import {BrowserRouter, Routes,Switch, Route} from "react-router-dom"
 import Signup from "./components/Login/Signup";
@@ -18,10 +19,11 @@ function App() {
         <BrowserRouter>
         <ActiveItemProvider>
         <SidebarProvider>
-        <ToastContainer position="top-center" />
+        <ToastContainer className="ml-32" position="top-center" />
           <Routes>
           <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path='/registro' element={<ProtectedRoute><Registro /></ProtectedRoute>} />
+          <Route path='/registro/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
           <Route path='/registro/add' element={<ProtectedRoute><AddEdit /></ProtectedRoute>}/>
           <Route path='/registro/update/:id' element={<ProtectedRoute><AddEdit /></ProtectedRoute>}/>  
           <Route path='/registro/view/:id' element={<ProtectedRoute><View /></ProtectedRoute>}/>
